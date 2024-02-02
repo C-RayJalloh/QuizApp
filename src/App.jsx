@@ -6,14 +6,17 @@ import Main from './components/Main';
 import Loader from './components/Loader';
 import Error from './components/Error';
 import Start from './components/Start';
+import Questions from './components/Questions';
 
-
-// the initail object state
+// the initail object state - pieces of state
 const initailState = {
     questions: [],
 
     // THE STATUS STATE - loading, error, ready, finished
-    status: "loading"
+    status: "loading",
+
+    // index to take a certain  question out of the array
+    index: 0,
 };
 
 // The reducer, which takes in the current state and the action that was dispatched
@@ -28,6 +31,10 @@ function reducer(state, action) {
       case 'dataFailed': 
       return {...state, status: "error"};
 
+      // another case on how to start the quiz
+      case 'start' :
+        return {...state, status: "active"};
+
     default:
       throw new Error('Action unknown');
   }
@@ -35,8 +42,8 @@ function reducer(state, action) {
 
 
 export default function App() {
-  // useReducer hook 
-  const  [{questions, status}, dispatch] = useReducer(reducer,initailState)
+  // useReducer hook - and destructuring the states
+  const  [{questions, status, index}, dispatch] = useReducer(reducer,initailState)
   
   // get the total number of questions
   const numQuestions = questions.length;
@@ -58,8 +65,8 @@ export default function App() {
       <Main>
       {status === "loading" && <Loader />}
       {status === "error" && <Error />}
-      {status === "ready" && <Start numQuestions={numQuestions} />}
-      
+      {status === "ready" && <Start numQuestions={numQuestions} dispatch={dispatch} />}
+      {status === "active" && <Questions />}
       </Main>
 
     </div>
