@@ -2,6 +2,9 @@
 import { useEffect, useReducer } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
+import Loader from './components/Loader';
+import Error from './components/Error';
+import Start from './components/Start';
 
 
 // the initail object state
@@ -22,7 +25,7 @@ function reducer(state, action) {
 
       // another case on  how to handle errors
       case 'dataFailed': 
-      return {...state, status: 'error'};
+      return {...state, status: "error"};
 
     default:
       throw new Error('Action unknown');
@@ -34,7 +37,7 @@ function reducer(state, action) {
 
 export default function App() {
   // useReducer hook 
-  const  [state, dispatch] = useReducer(reducer,initailState)
+  const  [{questions, status}, dispatch] = useReducer(reducer,initailState)
   
   // this side effect is going to run once when the component mounts.
   // and fetch the questions from the local server
@@ -43,15 +46,17 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => dispatch({type: 'dataReceived', payload: data}))
       // eslint-disable-next-line no-unused-vars
-      .catch((err) => dispatch({type: 'datFailed'}));
+      .catch((err) => dispatch({type: 'dataFailed'}));
   }, []);
   return (
     <div className="app">
       <Header />
 
       <Main>
-        <p>1/10</p>
-        <p>Questions</p>
+      {status === "loading" && <Loader />}
+      {status === "error" && <Error />}
+      {status === "ready" && <Start />}
+      
       </Main>
 
     </div>
