@@ -1,9 +1,10 @@
-function Start() {
+/* eslint-disable react/prop-types */
+function Start({ numQuestions}) {
     return (
         <div className="start">
             <h2>Welcome to the Quiz!</h2>
-            <h3>X questions to test your React Mastery</h3>
-            <button>Let &apos;s start</button>
+            <h3>{numQuestions} questions to test your React Mastery</h3>
+            <button className="btn btn-ui">Let &apos;s start</button>
         </div>
     )
 }

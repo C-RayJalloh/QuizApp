@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useEffect, useReducer } from 'react';
 import Header from './components/Header';
@@ -33,12 +34,14 @@ function reducer(state, action) {
 }
 
 
-
-
 export default function App() {
   // useReducer hook 
   const  [{questions, status}, dispatch] = useReducer(reducer,initailState)
   
+  // get the total number of questions
+  const numQuestions = questions.length;
+
+
   // this side effect is going to run once when the component mounts.
   // and fetch the questions from the local server
   useEffect(function () {
@@ -55,7 +58,7 @@ export default function App() {
       <Main>
       {status === "loading" && <Loader />}
       {status === "error" && <Error />}
-      {status === "ready" && <Start />}
+      {status === "ready" && <Start numQuestions={numQuestions} />}
       
       </Main>
 
