@@ -66,7 +66,7 @@ export default function App() {
       {status === "loading" && <Loader />}
       {status === "error" && <Error />}
       {status === "ready" && <Start numQuestions={numQuestions} dispatch={dispatch} />}
-      {status === "active" && <Questions />}
+      {status === "active" && <Questions question={questions[index]}/>}
       </Main>
 
     </div>
