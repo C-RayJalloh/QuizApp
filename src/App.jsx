@@ -17,6 +17,9 @@ const initailState = {
 
     // index to take a certain  question out of the array
     index: 0,
+    
+    // correct answer
+    answer: null
 };
 
 // The reducer, which takes in the current state and the action that was dispatched
@@ -35,6 +38,10 @@ function reducer(state, action) {
       case 'start' :
         return {...state, status: "active"};
 
+      // another case on how to get the correct answer for the options
+      case 'answerIs' :
+        return {...state,  answer: action.payload}
+
     default:
       throw new Error('Action unknown');
   }
@@ -43,7 +50,7 @@ function reducer(state, action) {
 
 export default function App() {
   // useReducer hook - and destructuring the states
-  const  [{questions, status, index}, dispatch] = useReducer(reducer,initailState)
+  const  [{questions, status, index, answer}, dispatch] = useReducer(reducer,initailState)
   
   // get the total number of questions
   const numQuestions = questions.length;
@@ -66,7 +73,7 @@ export default function App() {
       {status === "loading" && <Loader />}
       {status === "error" && <Error />}
       {status === "ready" && <Start numQuestions={numQuestions} dispatch={dispatch} />}
-      {status === "active" && <Questions question={questions[index]}/>}
+      {status === "active" && <Questions question={questions[index]} dispatch={dispatch} answer={answer}/>}
       </Main>
 
     </div>
