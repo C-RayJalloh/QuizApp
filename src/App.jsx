@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useEffect, useReducer } from 'react';
@@ -7,6 +8,9 @@ import Loader from './components/Loader';
 import Error from './components/Error';
 import Start from './components/Start';
 import Questions from './components/Questions';
+import NextButton from './components/NextButton';
+import ProgressBar from './components/progressBar';
+
 
 // the initail object state - pieces of state
 const initailState = {
@@ -19,7 +23,10 @@ const initailState = {
     index: 0,
     
     // correct answer
-    answer: null
+    answer: null,
+
+    // update points
+    points: 0,
 };
 
 // The reducer, which takes in the current state and the action that was dispatched
@@ -40,7 +47,23 @@ function reducer(state, action) {
 
       // another case on how to get the correct answer for the options
       case 'answerIs' :
-        return {...state,  answer: action.payload}
+        const currentQuestion = state.questions.at(state.index)
+ 
+        // handling the currect answer and the giving it points
+        return {
+          ...state,
+          answer: action.payload,
+          points:
+            action.payload === currentQuestion.correctOption
+              ? state.points + currentQuestion.points
+              : state.points,
+        };
+
+        //  this is when you move onto the next question
+        case 'nextQuestion' :
+          return {
+            ...state, index: state.index + 1, answer: null
+          };
 
     default:
       throw new Error('Action unknown');
@@ -50,10 +73,14 @@ function reducer(state, action) {
 
 export default function App() {
   // useReducer hook - and destructuring the states
-  const  [{questions, status, index, answer}, dispatch] = useReducer(reducer,initailState)
+  const  [{questions, status, index, answer, points}, dispatch] = useReducer(reducer,initailState)
   
-  // get the total number of questions
+  // get the total number of questions and points
   const numQuestions = questions.length;
+
+  const maxPossiblePoints = questions.reduce((prev, curr) => prev + curr.points, 0);
+
+
 
 
   // this side effect is going to run once when the component mounts.
@@ -70,12 +97,29 @@ export default function App() {
       <Header />
 
       <Main>
-      {status === "loading" && <Loader />}
-      {status === "error" && <Error />}
-      {status === "ready" && <Start numQuestions={numQuestions} dispatch={dispatch} />}
-      {status === "active" && <Questions question={questions[index]} dispatch={dispatch} answer={answer}/>}
+        {status === "loading" && <Loader />}
+        {status === "error" && <Error />}
+        {status === "ready" && (
+          <Start numQuestions={numQuestions} dispatch={dispatch} />
+        )}
+        {status === "active" && (
+          <>
+            <ProgressBar
+              index={index}
+              numQuestions={numQuestions}
+              points={points}
+              maxPossiblePoints={maxPossiblePoints}
+              answer={answer}
+            />
+            <Questions
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+            />
+            <NextButton dispatch={dispatch} answer={answer} />
+          </>
+        )}
       </Main>
-
     </div>
   );
 }
