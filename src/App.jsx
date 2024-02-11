@@ -67,7 +67,7 @@ function reducer(state, action) {
           };
 
         case 'finish' :
-          return {...state, status: "finish"};
+          return {...state, status: "finished"};
 
     default:
       throw new Error('Action unknown');
