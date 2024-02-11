@@ -20,7 +20,7 @@ function NextButton({ dispatch, answer, index, numQuestions }) {
       >
         Done
       </button>
-        )
+        );
 }
 
 export default NextButton
