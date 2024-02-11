@@ -4,7 +4,7 @@
 import Options from '../components/Options';
 
 function Questions({question, dispatch, answer }) {
-    console.log(question);
+  
     return (
       // displaying the current questions  and options for users to answer
       <div>
