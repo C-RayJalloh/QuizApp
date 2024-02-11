@@ -10,6 +10,7 @@ import Start from './components/Start';
 import Questions from './components/Questions';
 import NextButton from './components/NextButton';
 import ProgressBar from './components/progressBar';
+import Scores from './components/Scores';
 
 
 // the initail object state - pieces of state
@@ -65,6 +66,9 @@ function reducer(state, action) {
             ...state, index: state.index + 1, answer: null
           };
 
+        case 'finish' :
+          return {...state, status: "finish"};
+
     default:
       throw new Error('Action unknown');
   }
@@ -116,9 +120,11 @@ export default function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton dispatch={dispatch} answer={answer} />
+            <NextButton dispatch={dispatch} answer={answer} numQuestions={numQuestions} index={index} />
           </>
         )}
+        {status === "finished" && ( 
+        <Scores points={points} maxPossiblePoints={maxPossiblePoints} /> )}
       </Main>
     </div>
   );
