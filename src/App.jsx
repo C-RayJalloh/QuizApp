@@ -9,7 +9,7 @@ import Error from "./components/Error";
 import Start from "./components/Start";
 import Questions from "./components/Questions";
 import NextButton from "./components/NextButton";
-import ProgressBar from "./components/progressBar";
+import ProgressBar from "./components/ProgressBar";
 import Scores from "./components/Scores";
 import Timer from "./components/Timer";
 
