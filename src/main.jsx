@@ -113,8 +113,9 @@ export default Challenge
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/*
-   <App />
-*/}
     <Challenge />
+  */}
+  
+  <App />
   </React.StrictMode>
 );
