@@ -38,7 +38,7 @@ const initailState = {
   timeLeft: null,
 };
 
-QuestionApi = 'http://localhost:8000';
+const QuestionApi = 'http://localhost:8000';
 
 // The reducer, which takes in the current state and the action that was dispatched
 function reducer(state, action) {
