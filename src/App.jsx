@@ -38,6 +38,8 @@ const initailState = {
   timeLeft: null,
 };
 
+QuestionApi = 'http://localhost:8000';
+
 // The reducer, which takes in the current state and the action that was dispatched
 function reducer(state, action) {
   // Setting up the switch statement
@@ -123,7 +125,7 @@ export default function App() {
   // this side effect is going to run once when the component mounts.
   // and fetch the questions from the local server
   useEffect(function () {
-    fetch("http://localhost:8000/questions")
+    fetch(`${QuestionApi}/questions`)
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       // eslint-disable-next-line no-unused-vars
