@@ -38,7 +38,6 @@ const initailState = {
   timeLeft: null,
 };
 
-const QuestionApi = 'http://localhost:8000';
 
 // The reducer, which takes in the current state and the action that was dispatched
 function reducer(state, action) {
@@ -125,7 +124,7 @@ export default function App() {
   // this side effect is going to run once when the component mounts.
   // and fetch the questions from the local server
   useEffect(function () {
-    fetch(`${QuestionApi}/questions`)
+    fetch('/questions')
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       // eslint-disable-next-line no-unused-vars
