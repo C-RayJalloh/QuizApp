@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server --watch data_api/questions.json --port 8000",
-    "start": "node app.js"
+    "start": "node src/app.js"
   },
   "dependencies": {
     "react": "^18.2.0",
