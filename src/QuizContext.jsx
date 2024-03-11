@@ -125,12 +125,16 @@ const initailState = {
     return (
         <QuizContextProvider value={{
             questions,
-            status,
-            index,
-            points: points,
-            answer,
-            highscore,
-            timeLeft
+        status,
+        index,
+        answer,
+        points,
+        highscore,
+        timeLeft,
+        numQuestions,
+        maxPossiblePoints,
+
+        dispatch,
         }}>
             { children}
         </QuizContextProvider>

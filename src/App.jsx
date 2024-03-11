@@ -110,7 +110,7 @@ import Timer from "./components/Timer";
 // }
 
 export default function App() {
-  const { status, points, highscore , question, answers, index, timeLeft } = useQuizContext();
+  const { status} = useQuizContext();
   // // useReducer hook - and destructuring the states
   // const [{ questions, status, index, answer, points, highscore, timeLeft }, dispatch] =
   //   useReducer(reducer, initailState);
@@ -133,46 +133,27 @@ export default function App() {
       //     .catch((err) => dispatch({ type: "dataFailed" }));
       // }, []);
       return (
-    <div className="app">
-      <Header />
+        <div className="app">
+          <Header />
 
-      <Main>
-        {status === "loading" && <Loader />}
-        {status === "error" && <Error />}
-        {status === "ready" && (
-          <Start numQuestions={numQuestions} dispatch={dispatch} />
-        )}
-        {status === "active" && (
-          <>
-         
-
-            <ProgressBar
-              
-              />
-            <Questions
-             
-              />
-            <footer>
-            <Timer dispatch={dispatch} timeLeft={timeLeft}/>
-            <NextButton
-              dispatch={dispatch}
-              answer={answer}
-              numQuestions={numQuestions}
-              index={index}
-              />
-            </footer>
-      
-          </>
-        )}
-        {status === "finished" && (
-          <Scores
-          points={points}
-          maxPossiblePoints={maxPossiblePoints}
-          highscore={highscore}
-          dispatch={dispatch}
-          />
-          )}
-      </Main>
-    </div>
-  );
+          <Main>
+            {status === "loading" && <Loader />}
+            {status === "error" && <Error />}
+            {status === "ready" && (
+              <Start numQuestions={numQuestions} dispatch={dispatch} />
+            )}
+            {status === "active" && (
+              <>
+                <ProgressBar />
+                <Questions />
+                <footer>
+                  <Timer />
+                  <NextButton />
+                </footer>
+              </>
+            )}
+            {status === "finished" && <Scores />}
+          </Main>
+        </div>
+      );
 }
