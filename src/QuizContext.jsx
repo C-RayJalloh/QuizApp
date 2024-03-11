@@ -104,6 +104,7 @@ const initailState = {
       const [{ questions, status, index, answer, points, highscore, timeLeft }, dispatch] =
       useReducer(reducer, initailState);
 
+     
 
   // this side effect is going to run once when the component mounts.
   // and fetch the questions from the local server

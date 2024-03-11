@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useEffect, useReducer } from "react";
+import { useQuizContext, QuizContextProvider } from "./QuizContext";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Loader from "./components/Loader";
@@ -114,12 +115,12 @@ export default function App() {
   //   useReducer(reducer, initailState);
 
   // get the total number of questions and points
-  const numQuestions = questions.length;
+  // const numQuestions = questions.length;
 
-  const maxPossiblePoints = questions.reduce(
-    (prev, curr) => prev + curr.points,
-    0
-  );
+  // const maxPossiblePoints = questions.reduce(
+  //   (prev, curr) => prev + curr.points,
+  //   0
+  // );
 
   // this side effect is going to run once when the component mounts.
   // and fetch the questions from the local server
