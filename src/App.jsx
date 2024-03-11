@@ -110,28 +110,29 @@ import Timer from "./components/Timer";
 // }
 
 export default function App() {
+  const { status, points, highscore , question, answers, index, timeLeft } = useQuizContext();
   // // useReducer hook - and destructuring the states
   // const [{ questions, status, index, answer, points, highscore, timeLeft }, dispatch] =
   //   useReducer(reducer, initailState);
-
+  
   // get the total number of questions and points
   // const numQuestions = questions.length;
-
+  
   // const maxPossiblePoints = questions.reduce(
   //   (prev, curr) => prev + curr.points,
   //   0
-  // );
-
-  // this side effect is going to run once when the component mounts.
-  // and fetch the questions from the local server
-  // useEffect(function () {
-  //   fetch('http://localhost:8000/questions')
-  //     .then((res) => res.json())
-  //     .then((data) => dispatch({ type: "dataReceived", payload: data }))
-  //     // eslint-disable-next-line no-unused-vars
-  //     .catch((err) => dispatch({ type: "dataFailed" }));
-  // }, []);
-  return (
+  //   );
+    
+    // this side effect is going to run once when the component mounts.
+    // and fetch the questions from the local server
+    // useEffect(function () {
+      //   fetch('http://localhost:8000/questions')
+      //     .then((res) => res.json())
+      //     .then((data) => dispatch({ type: "dataReceived", payload: data }))
+      //     // eslint-disable-next-line no-unused-vars
+      //     .catch((err) => dispatch({ type: "dataFailed" }));
+      // }, []);
+      return (
     <div className="app">
       <Header />
 
@@ -143,18 +144,14 @@ export default function App() {
         )}
         {status === "active" && (
           <>
+         
+
             <ProgressBar
-              index={index}
-              numQuestions={numQuestions}
-              points={points}
-              maxPossiblePoints={maxPossiblePoints}
-              answer={answer}
-            />
+              
+              />
             <Questions
-              question={questions[index]}
-              dispatch={dispatch}
-              answer={answer}
-            />
+             
+              />
             <footer>
             <Timer dispatch={dispatch} timeLeft={timeLeft}/>
             <NextButton
@@ -162,18 +159,19 @@ export default function App() {
               answer={answer}
               numQuestions={numQuestions}
               index={index}
-            />
+              />
             </footer>
+      
           </>
         )}
         {status === "finished" && (
           <Scores
-            points={points}
-            maxPossiblePoints={maxPossiblePoints}
-            highscore={highscore}
-            dispatch={dispatch}
+          points={points}
+          maxPossiblePoints={maxPossiblePoints}
+          highscore={highscore}
+          dispatch={dispatch}
           />
-        )}
+          )}
       </Main>
     </div>
   );

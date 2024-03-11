@@ -104,7 +104,12 @@ const initailState = {
       const [{ questions, status, index, answer, points, highscore, timeLeft }, dispatch] =
       useReducer(reducer, initailState);
 
-     
+      const numQuestions = questions.length;
+  
+      const maxPossiblePoints = questions.reduce(
+        (prev, curr) => prev + curr.points,
+        0
+        );
 
   // this side effect is going to run once when the component mounts.
   // and fetch the questions from the local server
