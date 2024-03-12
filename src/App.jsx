@@ -110,7 +110,7 @@ import Timer from "./components/Timer";
 // }
 
 export default function App() {
-  const { status} = useQuizContext();
+  const { status } = useQuizContext();
   // // useReducer hook - and destructuring the states
   // const [{ questions, status, index, answer, points, highscore, timeLeft }, dispatch] =
   //   useReducer(reducer, initailState);

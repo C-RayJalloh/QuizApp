@@ -123,7 +123,7 @@ const initailState = {
 
 
     return (
-        <QuizContextProvider value={{
+        <QuizContext.Provider value={{
             questions,
         status,
         index,
@@ -137,17 +137,16 @@ const initailState = {
         dispatch,
         }}>
             { children}
-        </QuizContextProvider>
+        </QuizContext.Provider>
 
-    )
+    );
   }
 
-  function useQuizContext() {
+  function useQuiz() {
     const context = useContext(QuizContext);
-    if (context === undefined)
-      throw new Error("useQuizContext was used outside the Provider");
+    
     return context;
   }
 
 
-export {QuizContextProvider, useQuizContext }
+export {QuizContextProvider, useQuiz}
