@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useEffect, useReducer } from "react";
-import { useQuizContext, QuizContextProvider } from "./QuizContext";
+import { useQuiz } from "./QuizContext";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Loader from "./components/Loader";
@@ -110,7 +110,8 @@ import Timer from "./components/Timer";
 // }
 
 export default function App() {
-  const { status } = useQuizContext();
+  const { status } = useQuiz() ;
+
   // // useReducer hook - and destructuring the states
   // const [{ questions, status, index, answer, points, highscore, timeLeft }, dispatch] =
   //   useReducer(reducer, initailState);

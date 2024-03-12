@@ -100,7 +100,7 @@ const initailState = {
     }
   }
 
-  function QuizContextProvider({ children}) {
+  function QuizProvider({ children}) {
       const [{ questions, status, index, answer, points, highscore, timeLeft }, dispatch] =
       useReducer(reducer, initailState);
 
@@ -149,4 +149,4 @@ const initailState = {
   }
 
 
-export {QuizContextProvider, useQuiz}
+export {QuizProvider, useQuiz}
